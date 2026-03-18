@@ -1,0 +1,699 @@
+/* ============================================================
+   erp-mobile.css  —  StockForge Mobile & Responsive System
+   Import AFTER erp.css and erp-forms.css
+   Covers: xs (< 480px), sm (< 640px), md (< 768px), lg (< 1024px)
+   ============================================================ */
+
+/* ============================================================
+   BREAKPOINT REFERENCE
+   --mob-xs : max-width 479px   (small phones)
+   --mob-sm : max-width 639px   (phones)
+   --mob-md : max-width 767px   (large phones / small tablets)
+   --mob-lg : max-width 1023px  (tablets / landscape phones)
+   ============================================================ */
+
+/* ============================================================
+   1. LAYOUT — PAGE & SIDEBAR
+   ============================================================ */
+
+/* App shell — main content next to sidebar */
+.erp-app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.erp-main-content {
+  flex: 1;
+  min-width: 0;
+  transition: margin-left 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Tablet ── */
+@media (max-width: 1023px) {
+  .erp-page {
+    padding: 20px 20px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 767px) {
+  .erp-page {
+    padding: 16px 14px;
+  }
+
+  /* Sidebar becomes a slide-over drawer on mobile */
+  .erp-sidebar-mobile-hidden {
+    transform: translateX(-100%);
+    position: fixed !important;
+    z-index: 999;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    box-shadow: 4px 0 24px rgba(15,23,42,0.18);
+    transition: transform 0.26s cubic-bezier(0.4,0,0.2,1) !important;
+  }
+
+  .erp-sidebar-mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  /* Dim overlay when sidebar is open */
+  .erp-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.45);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+    animation: erp-fade-in 0.2s ease;
+  }
+
+  .erp-sidebar-overlay.active {
+    display: block;
+  }
+
+  @keyframes erp-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
+/* ============================================================
+   2. MOBILE TOP NAV BAR
+      Add <div class="erp-topbar"> as first child inside layout
+      on mobile (hidden on desktop)
+   ============================================================ */
+
+.erp-topbar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .erp-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    height: 56px;
+    background: #0f172a;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.2);
+    flex-shrink: 0;
+  }
+
+  .erp-topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .erp-topbar-logo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+  }
+
+  .erp-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .erp-topbar-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .erp-topbar-btn:hover { background: rgba(255,255,255,0.16); }
+
+  .erp-topbar-btn.active { background: rgba(59,130,246,0.3); color: #60a5fa; }
+}
+
+/* ============================================================
+   3. PAGE HEADER
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .erp-page-title {
+    font-size: 18px !important;
+  }
+
+  .erp-page-subtitle {
+    font-size: 12px !important;
+  }
+
+  .erp-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .erp-header-actions .erp-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .erp-page-title { font-size: 16px !important; }
+}
+
+/* ============================================================
+   4. STAT CARDS GRID
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .erp-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 479px) {
+  .erp-stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .erp-stat-card {
+    padding: 14px;
+  }
+
+  .erp-stat-value {
+    font-size: 20px;
+  }
+
+  .erp-stat-value.mono {
+    font-size: 16px;
+  }
+
+  .erp-stat-icon {
+    width: 30px;
+    height: 30px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .erp-stat-footer {
+    font-size: 10.5px;
+  }
+}
+
+/* ============================================================
+   5. CARD & CARD HEADER
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .erp-search-bar {
+    width: 100%;
+  }
+
+  .erp-input {
+    min-width: unset;
+    width: 100%;
+    flex: 1;
+  }
+
+  .erp-select {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   6. TABLE  →  CARD LIST on mobile
+      Add class "erp-table-responsive" to the <table> wrapper
+      On mobile each row becomes a stacked card automatically
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-table-responsive .erp-table-wrap {
+    overflow-x: unset;
+  }
+
+  /* Hide the real <thead> */
+  .erp-table-responsive .erp-table thead {
+    display: none;
+  }
+
+  /* Each row → card */
+  .erp-table-responsive .erp-table tbody tr {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 10px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    animation: erp-row-in 0.22s ease both;
+  }
+
+  .erp-table-responsive .erp-table tbody tr:hover {
+    background: var(--bg-card-alt);
+  }
+
+  /* Each cell → label + value row */
+  .erp-table-responsive .erp-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    gap: 12px;
+  }
+
+  .erp-table-responsive .erp-table tbody td:last-child {
+    border-bottom: none;
+    padding-top: 10px;
+  }
+
+  /* Auto label via data-label attribute on each <td> */
+  .erp-table-responsive .erp-table tbody td::before {
+    content: attr(data-label);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Actions row — full width buttons */
+  .erp-table-responsive .erp-table tbody td.td-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .erp-table-responsive .erp-table tbody td.td-actions::before {
+    display: none;
+  }
+}
+
+/* Extra small — tighter card padding */
+@media (max-width: 479px) {
+  .erp-table-responsive .erp-table tbody tr {
+    padding: 12px 13px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ============================================================
+   7. HORIZONTAL SCROLL TABLE (alternative to card view)
+      Use "erp-table-scroll" instead of "erp-table-responsive"
+      when you need the table to stay as-is but scroll sideways
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-table-scroll .erp-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+  }
+
+  /* Subtle scroll hint shadow */
+  .erp-table-scroll .erp-table-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 24px;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.8));
+  }
+
+  .erp-table-scroll {
+    position: relative;
+  }
+
+  .erp-table-scroll .erp-table {
+    min-width: 600px;
+  }
+}
+
+/* ============================================================
+   8. BUTTONS — MOBILE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-btn {
+    font-size: 12.5px;
+    min-height: 40px;
+    padding: 9px 14px;
+  }
+
+  /* Full-width button utility */
+  .erp-btn-full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Floating action button (bottom-right) */
+  .erp-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 18px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.45);
+    z-index: 200;
+    transition: transform 0.18s, box-shadow 0.18s;
+    font-size: 22px;
+  }
+
+  .erp-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(37,99,235,0.55);
+  }
+
+  .erp-fab:active { transform: scale(0.96); }
+}
+
+/* ============================================================
+   9. MODAL / DIALOG — BOTTOM SHEET ON MOBILE
+   ============================================================ */
+
+@media (max-width: 639px) {
+  /* MUI Dialog override → bottom sheet */
+  .MuiDialog-root .MuiDialog-container {
+    align-items: flex-end !important;
+  }
+
+  .MuiDialog-root .MuiPaper-root {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 92vh !important;
+  }
+
+  /* erp-forms.css modal → bottom sheet */
+  .fm-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .fm-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 92vh !important;
+    animation: fm-sheet-in 0.3s cubic-bezier(0.32, 0.72, 0, 1) both !important;
+  }
+
+  @keyframes fm-sheet-in {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  /* Drag handle pill */
+  .fm-modal::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 99px;
+    background: #e2e8f0;
+    margin: 10px auto -4px;
+  }
+
+  .fm-modal-header { padding: 14px 18px 14px; }
+  .fm-modal-body   { padding: 16px 18px; }
+  .fm-modal-footer { padding: 14px 18px; }
+
+  /* Stack footer buttons on very small screens */
+  .fm-modal-footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .fm-modal-footer .fm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* MUI DialogActions stack */
+  .MuiDialogActions-root {
+    flex-direction: column-reverse !important;
+    padding: 12px 16px 16px !important;
+    gap: 8px !important;
+  }
+
+  .MuiDialogActions-root .MuiButton-root {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+/* ============================================================
+   10. FORM GRID — SINGLE COLUMN ON MOBILE
+   ============================================================ */
+
+@media (max-width: 639px) {
+  .fm-row,
+  .fm-row.fm-3col,
+  .fm-row.fm-1-2,
+  .fm-row.fm-2-1,
+  .fm-row.fm-auto { grid-template-columns: 1fr !important; }
+}
+
+/* ============================================================
+   11. BADGE & CHIP — TOUCH FRIENDLY
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-badge {
+    font-size: 10.5px;
+    padding: 3px 9px;
+  }
+}
+
+/* ============================================================
+   12. BOTTOM NAV BAR (optional — mobile only)
+       <nav class="erp-bottom-nav">
+         <a class="erp-bottom-nav-item active" href="/">...</a>
+       </nav>
+   ============================================================ */
+
+.erp-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .erp-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: #0f172a;
+    border-top: 1px solid rgba(51,65,85,0.6);
+    padding: 0 8px env(safe-area-inset-bottom, 8px);
+    height: 60px;
+    align-items: stretch;
+  }
+
+  .erp-bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-radius: 10px;
+    transition: color 0.15s, background 0.15s;
+    padding: 6px 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .erp-bottom-nav-item svg,
+  .erp-bottom-nav-item .erp-nav-icon {
+    font-size: 20px !important;
+    width: 22px;
+    height: 22px;
+    transition: transform 0.15s;
+  }
+
+  .erp-bottom-nav-item:hover {
+    color: #94a3b8;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .erp-bottom-nav-item.active {
+    color: #60a5fa;
+  }
+
+  .erp-bottom-nav-item.active svg,
+  .erp-bottom-nav-item.active .erp-nav-icon {
+    transform: translateY(-1px);
+  }
+
+  /* Push page content above bottom nav */
+  .erp-page {
+    padding-bottom: 80px;
+  }
+}
+
+/* ============================================================
+   13. PRODUCTION PAGE — SPECIFIC OVERRIDES
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* Job number chip */
+  .erp-job-number {
+    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: #475569;
+    display: inline-block;
+  }
+
+  /* Action icon buttons — make tap targets bigger */
+  .erp-btn-ghost {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+  }
+}
+
+/* ============================================================
+   14. SEARCH BAR — FULL WIDTH ON MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .erp-search-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .erp-input-wrap {
+    width: 100%;
+  }
+
+  .erp-input-wrap .erp-input {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .erp-select {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   15. TOUCH & SCROLL UTILITIES
+   ============================================================ */
+
+/* Smooth momentum scroll */
+.erp-scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.erp-scroll-y {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Prevent text select on UI elements */
+.erp-no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Safe area padding for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .erp-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .erp-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Hide on mobile / desktop helpers */
+.erp-hide-mobile  { display: block; }
+.erp-show-mobile  { display: none; }
+.erp-hide-desktop { display: none; }
+.erp-show-desktop { display: block; }
+
+@media (max-width: 767px) {
+  .erp-hide-mobile  { display: none !important; }
+  .erp-show-mobile  { display: block !important; }
+}
+
+@media (min-width: 768px) {
+  .erp-hide-desktop { display: none !important; }
+  .erp-show-desktop { display: block !important; }
+}
+
+/* Inline versions */
+.erp-hide-mobile-inline  { display: inline; }
+.erp-show-mobile-inline  { display: none; }
+
+@media (max-width: 767px) {
+  .erp-hide-mobile-inline { display: none !important; }
+  .erp-show-mobile-inline { display: inline !important; }
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Outer Circle Border -->
+  <circle cx="100" cy="100" r="95" fill="#8B4513" stroke="#D4A574" stroke-width="3"/>
+  
+  <!-- Inner White Circle -->
+  <circle cx="100" cy="100" r="85" fill="#FFF8F0"/>
+  
+  <!-- Decorative Border Pattern -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- House Icon -->
+  <g transform="translate(100, 80)">
+    <!-- House Base -->
+    <rect x="-20" y="0" width="40" height="30" fill="#D4A574" stroke="#8B4513" stroke-width="1.5"/>
+    
+    <!-- Roof -->
+    <path d="M -25 0 L 0 -15 L 25 0 Z" fill="#8B4513"/>
+    
+    <!-- Door -->
+    <rect x="-8" y="12" width="16" height="18" fill="#8B4513" rx="2"/>
+    
+    <!-- Window -->
+    <rect x="10" y="8" width="8" height="8" fill="#FFE4B5"/>
+    
+    <!-- Chimney -->
+    <rect x="15" y="-10" width="5" height="10" fill="#8B4513"/>
+  </g>
+  
+  <!-- Wheat Stalks (left) -->
+  <g transform="translate(50, 100)">
+    <line x1="0" y1="0" x2="0" y2="-20" stroke="#D4A574" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-22" rx="3" ry="8" fill="#D4A574"/>
+  </g>
+  
+  <!-- Wheat Stalks (right) -->
+  <g transform="translate(150, 100)">
+    <line x1="0" y1="0" x2="0" y2="-20" stroke="#D4A574" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-22" rx="3" ry="8" fill="#D4A574"/>
+  </g>
+  
+  <!-- Top Text: "CLASSIC" -->
+  <text x="100" y="45" text-anchor="middle" fill="#8B4513" font-size="24" font-weight="bold" font-family="serif">CLASSIC</text>
+  
+  <!-- Hindi Text: "गृह उद्योग" -->
+  <text x="100" y="145" text-anchor="middle" fill="#8B4513" font-size="22" font-weight="bold" font-family="serif">गृह उद्योग</text>
+  
+  <!-- Bottom Text: "HOMEMADE • PURE • TRADITIONAL" -->
+  <text x="100" y="165" text-anchor="middle" fill="#8B4513" font-size="8" font-weight="600" font-family="sans-serif" letter-spacing="1">HOMEMADE • PURE • TRADITIONAL</text>
+  
+  <!-- Decorative Elements (leaves) -->
+  <ellipse cx="35" cy="95" rx="8" ry="3" fill="#6B8E23" transform="rotate(-30 35 95)"/>
+  <ellipse cx="165" cy="95" rx="8" ry="3" fill="#6B8E23" transform="rotate(30 165 95)"/>
+</svg>
